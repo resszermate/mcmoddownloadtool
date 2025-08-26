@@ -1,5 +1,13 @@
 <script lang="ts">
-let files: FileList | null = null;
+  import { invoke } from '@tauri-apps/api/core';
+
+  let files: FileList | null = null;
+
+    async function getModNames(){
+    await invoke("get_mod_names", { fileList: { files_list: Array.from(files!).map(f => f.name) } });
+  }
+  
+
 </script>
 
 
@@ -14,7 +22,7 @@ let files: FileList | null = null;
   <input bind:files id="dir" multiple type="file" webkitdirectory>
 
   {#if files}
-  <table>
+  <table class="mods-table">
     <thead>
       <tr>
         <td>Name</td>
@@ -30,6 +38,8 @@ let files: FileList | null = null;
   {/each}
   </tbody>
   </table>
+
+  <button on:click={getModNames}>Download files from Modrinth</button>
   {/if}
   
 
