@@ -3,8 +3,8 @@
 
   let files: FileList | null = null;
 
-    async function getModNames(){
-    await invoke("get_mod_names", { fileList: { files_list: Array.from(files!).map(f => f.name) } });
+    async function downloadMods(){
+    await invoke("download_mods", { fileList: { files_list: Array.from(files!).map(f => f.name) } });
   }
   
 
@@ -39,7 +39,7 @@
   </tbody>
   </table>
 
-  <button on:click={getModNames}>Download files from Modrinth</button>
+  <button on:click={downloadMods}>Download files from Modrinth</button>
   {/if}
   
 
